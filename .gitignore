@@ -1,0 +1,32 @@
+.vs/
+.idea/
+Assets/Plugins/Editor/JetBrains.meta
+Assets/Plugins/Editor/JetBrains/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ibrary/
+[Ll]ogs/
+[Tt]emp/
+[Oo]bj/
+
+# Never ignore Asset meta data
+![Aa]ssets/**/*.meta
+
+[Aa]ssets/TextMesh*Pro/
+.vs/
+.gradle/
+
+# Unity3D generated meta files
+*.pidb.meta
+*.pdb.meta
+*.mdb.meta
+
+# Unity3D generated file on crash reports
+sysinfo.txt
+
+# Builds
+*.apk
+*.unitypackage
+
+# Crashlytics generated file
+crashlytics-build.properties
