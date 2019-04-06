@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Fader : GUIEffect<Fader> {
+public class Fader : GUIEffect {
     private Texture2D texture;
     private Rect rect;
     private float alpha;

@@ -119,11 +119,14 @@
     <Compile Include="Assets\EffectExamples\Shared\Scripts\ParticleMenu.cs" />
     <Compile Include="Assets\EffectExamples\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\PlayerController.cs" />
-    <Compile Include="Assets\RollingTextFade.cs" />
     <Compile Include="Assets\Scripts\Tools\CameraShake.cs" />
     <Compile Include="Assets\Scripts\Tools\Fader.cs" />
     <Compile Include="Assets\Scripts\Tools\GUIEffect.cs" />
+    <Compile Include="Assets\Scripts\Tools\MonoSingleton.cs" />
+    <Compile Include="Assets\Scripts\Tools\RollingTextFade.cs" />
     <Compile Include="Assets\Scripts\Tools\Singleton.cs" />
+    <Compile Include="Assets\Scripts\Tools\VCameras.cs" />
+    <Compile Include="Assets\ToolBox.cs" />
     <Compile Include="Assets\WrapTarget.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />

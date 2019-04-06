@@ -1,43 +1,24 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Assertions;
-using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour {
-    // Start is called before the first frame update
-
     private Animator animator;
     private Rigidbody2D rb;
-    private GameObject[] cameraList;
-    private Fader _fader;
-
-    const string TAG_cinemachine = "cinemachine";
-
-    void Start() {
-        animator = GetComponent<Animator>();
-        animator.SetBool("running", false);
-        animator.SetFloat("dy", -1F);
-        rb = GetComponent<Rigidbody2D>();
-        _fader = Fader.Instance;
-
-        cameraList = GameObject.FindGameObjectsWithTag(TAG_cinemachine);
-        for (int i = 0; i < cameraList.Length; i++) {
-            Debug.Log(cameraList[i].transform.name);
-        }
-    }
-
-    public void EnableVCam(GameObject vcam) {
-        Assert.IsNotNull(vcam);
-        for (int i = 0; i < cameraList.Length; i++) {
-            cameraList[i].SetActive(cameraList[i].gameObject == vcam);
-        }
-    }
+    private ToolBox toolBox;
 
     public float speed = 2F;
-    private float lastDx = 2F;
-    private float lastDy = -2F;
     public bool gaming = true;
 
+    void Awake() {
+        animator = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
+    }
+
+    private void Start() {
+        animator.SetBool("running", false);
+        animator.SetFloat("dy", -1F);
+        toolBox = ToolBox.Instance;
+    }
 
     private void OnCollisionEnter2D(Collision2D other) {
         Debug.Log("Player. CollisionEnter to " + other.gameObject.name);
@@ -50,11 +31,11 @@ public class PlayerController : MonoBehaviour {
     private IEnumerator<YieldInstruction> TeletransportTo(Transform wrap, Transform target) {
         gaming = false;
         animator.enabled = false;
-        _fader.FadeIn(1.5F);
+        toolBox.fader.FadeIn(1.5F);
         yield return new WaitForSeconds(0.7F); 
-        EnableVCam(FindChildrenByTag(wrap.parent, TAG_cinemachine));
+        toolBox.vCameras.EnableVCam(FindChildrenByTag(wrap.parent, VCameras.TAG));
         transform.position = target.position;
-        _fader.FadeOut(0.4f);
+        toolBox.fader.FadeOut(0.4f);
         yield return new WaitForSeconds(0.3F);
         animator.enabled = true;
         gaming = true;
@@ -64,6 +45,7 @@ public class PlayerController : MonoBehaviour {
         Debug.Log("Player. TriggerEnter to " + other.gameObject.name);
         if (other.gameObject.CompareTag("wrap")) {
             var wrap = other.GetComponent<WrapTarget>().target;
+//            CameraShake.ShakeMainCamera(0.07f, 0.2f);
             StartCoroutine(TeletransportTo(wrap, other.GetComponent<WrapTarget>().target));
         }
     }
@@ -97,12 +79,7 @@ public class PlayerController : MonoBehaviour {
         } else {
             animator.SetBool("running", false);
         }
-
-        lastDx = dx;
-        lastDy = dy;
     }
-
-
 
     private bool IsPressedDown() {
         return Input.GetKey(KeyCode.DownArrow);
@@ -139,5 +116,4 @@ public class PlayerController : MonoBehaviour {
 
         return path;
     }
-    
 }

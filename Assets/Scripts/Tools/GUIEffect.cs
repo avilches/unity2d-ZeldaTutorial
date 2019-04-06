@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public abstract class GUIEffect<T> : Singleton<T> where T :MonoBehaviour {
+public abstract class GUIEffect : MonoBehaviour {
 
     enum State { disabled, starting, ending }
     
