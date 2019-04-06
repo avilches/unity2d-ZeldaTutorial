@@ -12,12 +12,12 @@ public class PlayerController : MonoBehaviour {
     void Awake() {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        toolBox = ToolBox.Instance;
     }
 
     private void Start() {
         animator.SetBool("running", false);
         animator.SetFloat("dy", -1F);
-        toolBox = ToolBox.Instance;
     }
 
     private void OnCollisionEnter2D(Collision2D other) {

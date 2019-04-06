@@ -1,5 +1,9 @@
 ﻿using UnityEngine;
-
+/**
+ * 1) Add the Fader component to any object and call to o.GetComponent<Fader>.FadeIn()/FadeOut()
+ * 2) You can add to the ToolBox singleton with fader = gameObject.AddComponent<Fader>() and use the
+ * fader reference to call to the FadeIn()/FadeOut()
+ */
 public class Fader : GUIEffect {
     private Texture2D texture;
     private Rect rect;
@@ -23,7 +27,7 @@ public class Fader : GUIEffect {
         } else {
             alpha = Mathf.Lerp(alpha, -0.1f, fadeTime * Time.deltaTime);
             if (alpha < 0) {
-                Disable();
+                StopEffect();
             }
         }
     }
@@ -32,13 +36,13 @@ public class Fader : GUIEffect {
     public void FadeIn(float fadeTime = 1f) {
         this.fadeTime = fadeTime;
         alpha = 0F;
-        Start();
+        StartEffect();
     }
 
     // Método para activar la transición de salida
     public void FadeOut(float fadeTime = 1f) {
         this.fadeTime = fadeTime;
         alpha = 1F;
-        End();
+        EndEffect();
     }
 }

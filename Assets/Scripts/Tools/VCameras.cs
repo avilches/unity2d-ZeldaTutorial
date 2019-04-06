@@ -1,5 +1,11 @@
 using UnityEngine;
 
+/**
+ * Stores all the Virtual Cinemachine cameras.
+ * MUST BE TAGGED WITH THE "cinemachine" TAG
+ *
+ * Enable one of them with EnableVCam() method, which will disabled the others. 
+ */
 public class VCameras {
     private GameObject[] _cameraList;
     public static string TAG = "cinemachine";

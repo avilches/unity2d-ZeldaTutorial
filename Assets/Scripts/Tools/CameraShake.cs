@@ -1,6 +1,14 @@
 using UnityEngine;
 using UnityEngine.Assertions;
-
+/**
+ * It only works in regular cameras, not in Cinemachine
+ *
+ * Add the CameraShake script as component in you camera.
+ * Call to:
+ *     CameraShake.ShakeCamera(...)
+ *     CameraShake.ShakeMainCamera(...)
+ *     camerGameObject.GetComponent<CameraShake>.Shake(...)
+ */
 public class CameraShake : MonoBehaviour {
     private Transform camTransform;
 
@@ -8,7 +16,7 @@ public class CameraShake : MonoBehaviour {
     private float amount;
     private float decreaseFactor;
     private Vector3 originalPos;
-    private bool shaking = false;
+    private bool shaking;
 
     void Awake() {
         if (camTransform == null) {
@@ -45,7 +53,7 @@ public class CameraShake : MonoBehaviour {
         }
     }
 
-    public static void ShakeMainCamera(float amount, float duration, float decreaseFactor = 1.0F) {
+    public static void ShakeCamera(float amount, float duration, float decreaseFactor = 1.0F) {
         ShakeCamera(Camera.main, amount, duration);
     }
 

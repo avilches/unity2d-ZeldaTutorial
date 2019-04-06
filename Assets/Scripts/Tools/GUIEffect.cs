@@ -2,14 +2,14 @@
 
 public abstract class GUIEffect : MonoBehaviour {
 
-    enum State { disabled, starting, ending }
+    enum State { stopped, starting, ending }
     
     private Vector2 resolution;
     private State state;
     
     public void Awake() {
         resolution = new Vector2(Screen.width, Screen.height);
-        state = State.disabled;
+        state = State.stopped;
         Configure();
     }
 
@@ -18,11 +18,11 @@ public abstract class GUIEffect : MonoBehaviour {
 
     public bool IsStarting() { return state == State.starting; }
     public bool IisEnding() { return state == State.ending; }
-    public bool IsDisabled() { return state == State.disabled; }
+    public bool IsStopped() { return state == State.stopped; }
 
 
     public void OnGUI() {
-        if (IsDisabled()) return;
+        if (IsStopped()) return;
         if (resolution.x != Screen.width || resolution.y != Screen.height) {
             Configure();
         }
@@ -30,16 +30,16 @@ public abstract class GUIEffect : MonoBehaviour {
     }
 
     // Método para activar la transición de entrada
-    public void Start() {
+    public void StartEffect() {
         state = State.starting;
     }
 
-    public void End() {
+    public void EndEffect() {
         state = State.ending;
     }
 
-    public void Disable() {
-        state = State.disabled;
+    public void StopEffect() {
+        state = State.stopped;
     }
 
 }
