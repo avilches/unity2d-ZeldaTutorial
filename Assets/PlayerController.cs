@@ -13,15 +13,18 @@ public class PlayerController : MonoBehaviour {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         toolBox = ToolBox.Instance;
+        Debug.Log("AWAKE");
     }
 
     private void Start() {
         animator.SetBool("running", false);
         animator.SetFloat("dy", -1F);
+        toolBox.vCameras.EnableVCam(GameObject.Find("CM vc1"));
+        Debug.Log("START");
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
-        Debug.Log("Player. CollisionEnter to " + other.gameObject.name);
+        Debug.Log("Player. CollisionEnter to " + other.gameObject.name+ " "+other.contactCount);
     }
 
     private void OnCollisionExit2D(Collision2D other) {
@@ -34,6 +37,7 @@ public class PlayerController : MonoBehaviour {
         toolBox.fader.FadeIn(1.5F);
         yield return new WaitForSeconds(0.7F); 
         toolBox.vCameras.EnableVCam(FindChildrenByTag(wrap.parent, VCameras.TAG));
+        
         transform.position = target.position;
         toolBox.fader.FadeOut(0.4f);
         yield return new WaitForSeconds(0.3F);
@@ -42,11 +46,11 @@ public class PlayerController : MonoBehaviour {
     }
 
     void OnTriggerEnter2D(Collider2D other) {
-        Debug.Log("Player. TriggerEnter to " + other.gameObject.name);
+        Debug.Log("Player. OnTriggerEnter2D to " + other.name);
         if (other.gameObject.CompareTag("wrap")) {
-            var wrap = other.GetComponent<WrapTarget>().target;
+            var wrap = other.gameObject.GetComponent<WrapTarget>().target;
 //            CameraShake.ShakeMainCamera(0.07f, 0.2f);
-            StartCoroutine(TeletransportTo(wrap, other.GetComponent<WrapTarget>().target));
+            StartCoroutine(TeletransportTo(wrap, other.gameObject.GetComponent<WrapTarget>().target));
         }
     }
 

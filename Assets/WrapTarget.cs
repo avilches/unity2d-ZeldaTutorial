@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WrapTarget : MonoBehaviour {
     [SerializeField] public Transform target;
-    
+
     // Start is called before the first frame update
     void Start()
     {

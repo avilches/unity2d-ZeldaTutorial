@@ -21,6 +21,7 @@ public class VCameras {
     }
 
     public void EnableVCam(GameObject vcam) {
+        //Assert.IsNotNull(vcam);
         var cameraListLength = _cameraList.Length;
         for (int i = 0; i < cameraListLength; i++) {
             _cameraList[i].SetActive(_cameraList[i].gameObject == vcam);
